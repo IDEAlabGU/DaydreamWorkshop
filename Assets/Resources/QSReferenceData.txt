@@ -1,0 +1,38 @@
+# The '#' indicates a comment (and the line will be ignored by the application)
+# The '%' indicates a section divider in the information (refer to FORMAT/EXAMPLES to see
+# how to use the divider)
+#
+# FORMAT:
+#Fish Name%Formatted info about the fish%gameName%canTouch
+#
+# EXAMPLES:
+#Sixbar Angelfish%This is an Angelfish%FindTheFish%yes
+#Lionfish%This is a dangerous fish%FindTheFish%no
+#Turtle%this is a turtle% %yes
+# 
+# NOTE:
+# The Fish Name must be the same name as the reference image stored in (~/Resources/ReferenceImages)
+
+# Fill in info here, without the '#'. DO NOT use the '%' character unless it is being used to split the info as above.
+# Fish
+Sixbar Angelfish%The name “Sixbar” comes from the black bars along their body, of which there are usually six, as well as an extra white face stripe%FindTheFish%yes
+Lionfish%Lionfish are beautiful but incredibly poisonous predators that only take a thousandth of a second to strike and catch their prey%FindTheFish%no
+Bullethead Parrotfish%Parrotfish use bird-like beaks to gnaw on hard coral for food. They also create cocoons out of mucus for a peaceful night's sleep%FindTheFish%no
+Maori Wrasse%Maori Wrasse tend to swim alone or in territorial pairs, but are quite friendly. The Wrasse that lives on this reef is called Wally%FindTheFish%yes
+Bluespot Butterflyfish%The Bluespot Butterflyfish has an eye like spot near its tail and a black stripe through its real eye to confuse predators%FindTheFish%yes
+Triangular Butterflyfish%These Butterflyfish are often seen swimming in pairs, and can be very territorial over their section of the reef%FindTheFish%yes
+Clownfish%Clownfish have a mutually beneficial relationship with anemone, and they build up an immunity to their venomous tentacles.%FindTheFish%yes
+Surgeonfish%Surgeonfish has scalpel like spines along the sides of its tail which lay flat in a groove until they feel threatened or provoked%FindTheFish%no
+#
+# Coral
+Brain Coral%Brain coral actually have long, thin tentacles that they use as protection during the day and to catch food at night%CreateEnvironmentGame%yes
+#Table Coral%Staghorn coral is one of the fastest growing corals on the reef, and can reach heights of over two metres tall%CreateEnvironmentGame%yes
+Plate Coral%Plate corals provide lots of hiding spots for other reef life, like turtles and gropers, who use them as protection or camouflage%CreateEnvironmentGame%yes
+Staghorn Coral%Staghorn coral is one of the fastest growing corals on the reef, and can reach heights of over two metres tall%CreateEnvironmentGame%yes
+#
+# Others
+Anenome%A sea anemone is actually a predatory animal that uses its venomous tentacles to paralyse small reef creatures to then eat%CreateEnvironmentGame%yes
+Giant Clam%Every day, a giant clam is will syphon an entire Olympic swimming pool worth of water to filter out plankton to eat%CreateEnvironmentGame%yes
+Blue Starfish%The blue starfish can grow up to 30 centimetres in diameter, and is sometimes eaten by pufferfish and other reef creatures%CreateEnvironmentGame%yes
+Turtle%Turtles are reptiles who have existed for around 215 million years.% %yes
+# END

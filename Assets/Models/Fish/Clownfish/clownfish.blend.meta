@@ -1,0 +1,543 @@
+fileFormatVersion: 2
+guid: 7d30323e989f0c84194ab220b4d71ff7
+timeCreated: 1471948055
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: AnalFin_0
+    100004: AnalFin_1
+    100006: AnalFin_2
+    100008: BackFin_B_0
+    100010: BackFin_B_1
+    100012: BackFin_B_2
+    100014: BackFin_M_1
+    100016: BackFin_M_2
+    100018: BackFin_T_0
+    100020: BackFin_T_1
+    100022: BackFin_T_2
+    100024: Body
+    100026: Cheek
+    100028: Dorsal_Fin_3
+    100030: DorsalFin_1
+    100032: DorsalFin_2
+    100034: ElvisFin_Back1_L
+    100036: ElvisFin_Back1_R
+    100038: ElvisFin_Back2_L
+    100040: ElvisFin_Back2_R
+    100042: ElvisFin_ConBack_L
+    100044: ElvisFin_ConBack_R
+    100046: ElvisFin_ConFront_L
+    100048: ElvisFin_ConFront_R
+    100050: ElvisFin_Front1_L
+    100052: ElvisFin_Front1_R
+    100054: ElvisFin_Front2_L
+    100056: ElvisFin_Front2_R
+    100058: Eye_L
+    100060: Eye_R
+    100062: EyeSocket_L
+    100064: EyeSocket_R
+    100066: FishRig
+    100068: Lower_Jaw
+    100070: Neck
+    100072: PecFin_Bot1_L
+    100074: PecFin_Bot1_R
+    100076: PecFin_Bot2_L
+    100078: PecFin_Bot2_R
+    100080: PecFin_Con0_L
+    100082: PecFin_Con0_R
+    100084: PecFin_Mid1_L
+    100086: PecFin_Mid1_R
+    100088: PecFin_Mid2_L
+    100090: PecFin_Mid2_R
+    100092: PecFin_Top1_L
+    100094: PecFin_Top1_R
+    100096: PecFin_Top2_L
+    100098: PecFin_Top2_R
+    100100: Rib_B_1
+    100102: Rib_B_1_1
+    100104: Rib_B_2_1
+    100106: Rib_B_2_2
+    100108: Rib_B_3_1
+    100110: Rib_B_3_2
+    100112: Rib_T_1_1
+    100114: Rib_T_1_2
+    100116: Rib_T_2_1
+    100118: Rib_T_2_2
+    100120: Rib_T_3_1
+    100122: Rib_T_3_2
+    100124: Rib_T_F1
+    100126: Rib_T_F1_2
+    100128: Spine1
+    100130: Spine2
+    100132: Spine3
+    100134: Upper_Jaw
+    400000: //RootNode
+    400002: AnalFin_0
+    400004: AnalFin_1
+    400006: AnalFin_2
+    400008: BackFin_B_0
+    400010: BackFin_B_1
+    400012: BackFin_B_2
+    400014: BackFin_M_1
+    400016: BackFin_M_2
+    400018: BackFin_T_0
+    400020: BackFin_T_1
+    400022: BackFin_T_2
+    400024: Body
+    400026: Cheek
+    400028: Dorsal_Fin_3
+    400030: DorsalFin_1
+    400032: DorsalFin_2
+    400034: ElvisFin_Back1_L
+    400036: ElvisFin_Back1_R
+    400038: ElvisFin_Back2_L
+    400040: ElvisFin_Back2_R
+    400042: ElvisFin_ConBack_L
+    400044: ElvisFin_ConBack_R
+    400046: ElvisFin_ConFront_L
+    400048: ElvisFin_ConFront_R
+    400050: ElvisFin_Front1_L
+    400052: ElvisFin_Front1_R
+    400054: ElvisFin_Front2_L
+    400056: ElvisFin_Front2_R
+    400058: Eye_L
+    400060: Eye_R
+    400062: EyeSocket_L
+    400064: EyeSocket_R
+    400066: FishRig
+    400068: Lower_Jaw
+    400070: Neck
+    400072: PecFin_Bot1_L
+    400074: PecFin_Bot1_R
+    400076: PecFin_Bot2_L
+    400078: PecFin_Bot2_R
+    400080: PecFin_Con0_L
+    400082: PecFin_Con0_R
+    400084: PecFin_Mid1_L
+    400086: PecFin_Mid1_R
+    400088: PecFin_Mid2_L
+    400090: PecFin_Mid2_R
+    400092: PecFin_Top1_L
+    400094: PecFin_Top1_R
+    400096: PecFin_Top2_L
+    400098: PecFin_Top2_R
+    400100: Rib_B_1
+    400102: Rib_B_1_1
+    400104: Rib_B_2_1
+    400106: Rib_B_2_2
+    400108: Rib_B_3_1
+    400110: Rib_B_3_2
+    400112: Rib_T_1_1
+    400114: Rib_T_1_2
+    400116: Rib_T_2_1
+    400118: Rib_T_2_2
+    400120: Rib_T_3_1
+    400122: Rib_T_3_2
+    400124: Rib_T_F1
+    400126: Rib_T_F1_2
+    400128: Spine1
+    400130: Spine2
+    400132: Spine3
+    400134: Upper_Jaw
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Plane
+    4300002: Body
+    7400000: clownfish_default_take
+    7400002: SkeletonRigAction_003
+    9500000: //RootNode
+    13700000: Body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: clownfish_default_take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: FishRig
+        weight: 1
+      - path: FishRig/EyeSocket_L
+        weight: 1
+      - path: FishRig/EyeSocket_L/Eye_L
+        weight: 1
+      - path: FishRig/EyeSocket_R
+        weight: 1
+      - path: FishRig/EyeSocket_R/Eye_R
+        weight: 1
+      - path: FishRig/Neck
+        weight: 1
+      - path: FishRig/Neck/Cheek
+        weight: 1
+      - path: FishRig/Neck/Cheek/Lower_Jaw
+        weight: 1
+      - path: FishRig/Neck/Cheek/Upper_Jaw
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Bot1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Bot1_L/PecFin_Bot2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Mid1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Mid1_L/PecFin_Mid2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Top1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Top1_L/PecFin_Top2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Bot1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Bot1_R/PecFin_Bot2_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Mid1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Mid1_R/PecFin_Mid2_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Top1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Top1_R/PecFin_Top2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R/ElvisFin_Back1_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R/ElvisFin_Back1_R/ElvisFin_Back2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R/ElvisFin_Front1_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R/ElvisFin_Front1_R/ElvisFin_Front2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L/ElvisFin_Back1_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L/ElvisFin_Back1_L/ElvisFin_Back2_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L/ElvisFin_Front1_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L/ElvisFin_Front1_L/ElvisFin_Front2_L
+        weight: 1
+      - path: FishRig/Neck/Rib_T_1_1
+        weight: 1
+      - path: FishRig/Neck/Rib_T_1_1/Rib_T_1_2
+        weight: 1
+      - path: FishRig/Neck/Rib_T_F1
+        weight: 1
+      - path: FishRig/Neck/Rib_T_F1/Rib_T_F1_2
+        weight: 1
+      - path: FishRig/Neck/Spine1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_B_2_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_B_2_1/Rib_B_2_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_T_2_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_T_2_1/Rib_T_2_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_B_3_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_B_3_1/Rib_B_3_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_T_3_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_T_3_1/Rib_T_3_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0/AnalFin_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0/AnalFin_1/AnalFin_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0/BackFin_B_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0/BackFin_B_1/BackFin_B_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_M_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_M_1/BackFin_M_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0/BackFin_T_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0/BackFin_T_1/BackFin_T_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1/DorsalFin_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1/DorsalFin_2/Dorsal_Fin_3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SkeletonRigAction_003
+      takeName: SkeletonRigAction_003
+      firstFrame: -3
+      lastFrame: 52
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: FishRig
+        weight: 1
+      - path: FishRig/EyeSocket_L
+        weight: 1
+      - path: FishRig/EyeSocket_L/Eye_L
+        weight: 1
+      - path: FishRig/EyeSocket_R
+        weight: 1
+      - path: FishRig/EyeSocket_R/Eye_R
+        weight: 1
+      - path: FishRig/Neck
+        weight: 1
+      - path: FishRig/Neck/Cheek
+        weight: 1
+      - path: FishRig/Neck/Cheek/Lower_Jaw
+        weight: 1
+      - path: FishRig/Neck/Cheek/Upper_Jaw
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Bot1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Bot1_L/PecFin_Bot2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Mid1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Mid1_L/PecFin_Mid2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Top1_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_L/PecFin_Top1_L/PecFin_Top2_L
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Bot1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Bot1_R/PecFin_Bot2_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Mid1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Mid1_R/PecFin_Mid2_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Top1_R
+        weight: 1
+      - path: FishRig/Neck/PecFin_Con0_R/PecFin_Top1_R/PecFin_Top2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R/ElvisFin_Back1_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConBack_R/ElvisFin_Back1_R/ElvisFin_Back2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R/ElvisFin_Front1_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1/ElvisFin_ConFront_R/ElvisFin_Front1_R/ElvisFin_Front2_R
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L/ElvisFin_Back1_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConBack_L/ElvisFin_Back1_L/ElvisFin_Back2_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L/ElvisFin_Front1_L
+        weight: 1
+      - path: FishRig/Neck/Rib_B_1_1/ElvisFin_ConFront_L/ElvisFin_Front1_L/ElvisFin_Front2_L
+        weight: 1
+      - path: FishRig/Neck/Rib_T_1_1
+        weight: 1
+      - path: FishRig/Neck/Rib_T_1_1/Rib_T_1_2
+        weight: 1
+      - path: FishRig/Neck/Rib_T_F1
+        weight: 1
+      - path: FishRig/Neck/Rib_T_F1/Rib_T_F1_2
+        weight: 1
+      - path: FishRig/Neck/Spine1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_B_2_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_B_2_1/Rib_B_2_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_T_2_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Rib_T_2_1/Rib_T_2_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_B_3_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_B_3_1/Rib_B_3_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_T_3_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Rib_T_3_1/Rib_T_3_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0/AnalFin_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/AnalFin_0/AnalFin_1/AnalFin_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0/BackFin_B_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_B_0/BackFin_B_1/BackFin_B_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_M_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_M_1/BackFin_M_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0/BackFin_T_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/BackFin_T_0/BackFin_T_1/BackFin_T_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1/DorsalFin_2
+        weight: 1
+      - path: FishRig/Neck/Spine1/Spine2/Spine3/DorsalFin_1/DorsalFin_2/Dorsal_Fin_3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
