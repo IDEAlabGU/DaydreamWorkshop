@@ -16,14 +16,23 @@
 // full VR Keyboard.
 
 using UnityEngine;
-using UnityEngine.VR;
 using System;
 using System.Runtime.InteropServices;
+
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
+using UnityEngine.VR;
+#endif  // UNITY_2017_2_OR_NEWER
 
 /// @cond
 namespace Gvr.Internal {
   public class AndroidNativeKeyboardProvider : IKeyboardProvider {
     private IntPtr renderEventFunction;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    private float currentDistance = 0.0f;
+#endif // UNITY_ANDROID && !UNITY_EDITOR
 
     // Android method names.
     private const string METHOD_NAME_GET_PACKAGE_MANAGER = "getPackageManager";
@@ -92,6 +101,10 @@ namespace Gvr.Internal {
     [DllImport(dllName)]
     private static extern bool gvr_keyboard_update_controller_ray(IntPtr keyboard_context, IntPtr vector3Start,
       IntPtr vector3End, IntPtr vector3Hit);
+
+    // Updates the touch state of the controller.
+    [DllImport(dllName)]
+    private static extern void gvr_keyboard_update_controller_touch(IntPtr keyboard_context, bool touched, IntPtr vector2Pos);
 
     // Returns the EditText with for the keyboard.
     [DllImport (dllName)]
@@ -171,7 +184,8 @@ namespace Gvr.Internal {
 
     // Initialization function.
     public AndroidNativeKeyboardProvider() {
-#if UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
+      // Running on Android device.
       AndroidJavaObject activity = GvrActivityHelper.GetActivity();
       if (activity == null) {
         Debug.Log("Failed to get activity for keyboard.");
@@ -189,16 +203,13 @@ namespace Gvr.Internal {
         plugin.Call("initializeKeyboard", context);
         isValid = true;
       }
-#endif // UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
-      // Prevent compilation errors on 5.3.3 and lower.
-#if UNITY_HAS_GOOGLEVR
-      UnityEngine.XR.InputTracking.disablePositionalTracking = true;
-#endif  // UNITY_HAS_GOOGLEVR
+#endif // UNITY_ANDROID && !UNITY_EDITOR
       renderEventFunction = GetKeyboardRenderEventFunc();
     }
 
     ~AndroidNativeKeyboardProvider() {
-      gvr_keyboard_destroy(keyboard_context);
+      if (keyboard_context != IntPtr.Zero)
+        gvr_keyboard_destroy(keyboard_context);
     }
 
     public bool Create(GvrKeyboard.KeyboardCallback keyboardEvent) {
@@ -211,50 +222,72 @@ namespace Gvr.Internal {
     }
 
     public void Show(Matrix4x4 userMatrix, bool useRecommended, float distance, Matrix4x4 model) {
+#if UNITY_ANDROID && !UNITY_EDITOR
+      currentDistance = distance;
+#endif  // UNITY_ANDROID && !UNITY_EDITOR
+
       if (useRecommended) {
         worldMatrix = getRecommendedMatrix(distance);
       } else {
-       // Convert to GVR coordinates.
-       Matrix4x4 flipZ = Matrix4x4.Scale(new Vector3(1, 1, -1));
-       worldMatrix = flipZ * userMatrix * flipZ;
-       worldMatrix = worldMatrix.transpose;
+        // Convert to GVR coordinates.
+        worldMatrix = Pose3D.FlipHandedness(userMatrix).transpose;
       }
       Matrix4x4 matToSet = worldMatrix * model.transpose;
       IntPtr mat_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(matToSet));
       Marshal.StructureToPtr(matToSet, mat_ptr, true);
       gvr_keyboard_set_world_from_keyboard_matrix(keyboard_context, mat_ptr);
       gvr_keyboard_show(keyboard_context);
+      Marshal.FreeHGlobal(mat_ptr);
     }
 
     public void UpdateData() {
-#if UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
+      // Running on Android device.
       // Update controller state.
-      GvrBasePointer pointer = GvrPointerManager.Pointer;
-      if (pointer != null && GvrController.State == GvrConnectionState.Connected) {
-        bool pressed = GvrController.ClickButton;
-        gvr_keyboard_update_button_state(keyboard_context, kGvrControllerButtonClick, pressed);
+      GvrBasePointer pointer = GvrPointerInputModule.Pointer;
+      bool isPointerAvailable = pointer != null && pointer.IsAvailable;
+      if (isPointerAvailable) {
+        GvrControllerInputDevice controllerInputDevice = pointer.ControllerInputDevice;
+        if (controllerInputDevice != null && controllerInputDevice.State == GvrConnectionState.Connected) {
+          bool pressed = controllerInputDevice.GetButton(GvrControllerButton.TouchPadButton);
+          gvr_keyboard_update_button_state(keyboard_context, kGvrControllerButtonClick, pressed);
 
-        Vector3 startPoint = pointer.PointerTransform.position;
-        // Need to flip Z for native library
-        startPoint.z *= -1;
-        IntPtr start_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(startPoint));
-        Marshal.StructureToPtr(startPoint, start_ptr, true);
+          // Update touch state
+          Vector2 touch_pos = controllerInputDevice.TouchPos;
+          IntPtr touch_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(touch_pos));
+          Marshal.StructureToPtr(touch_pos, touch_ptr, true);
+          bool isTouching = controllerInputDevice.GetButton(GvrControllerButton.TouchPadTouch);
+          gvr_keyboard_update_controller_touch(keyboard_context, isTouching, touch_ptr);
 
-        Vector3 endPoint = pointer.LineEndPoint;
-        // Need to flip Z for native library
-        endPoint.z *= -1;
-        IntPtr end_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(endPoint));
-        Marshal.StructureToPtr(endPoint, end_ptr, true);
+          GvrBasePointer.PointerRay pointerRay = pointer.GetRayForDistance(currentDistance);
 
-        Vector3 hit = Vector3.one;
-        IntPtr hit_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(Vector3.zero));
-        Marshal.StructureToPtr(Vector3.zero, hit_ptr, true);
+          Vector3 startPoint = pointerRay.ray.origin;
+          // Need to flip Z for native library
+          startPoint.z *= -1;
+          IntPtr start_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(startPoint));
+          Marshal.StructureToPtr(startPoint, start_ptr, true);
 
-        gvr_keyboard_update_controller_ray(keyboard_context, start_ptr, end_ptr, hit_ptr);
-        hit = (Vector3)Marshal.PtrToStructure(hit_ptr, typeof(Vector3));
-        hit.z *= -1;
+          Vector3 endPoint = pointerRay.ray.GetPoint(pointerRay.distance);
+          // Need to flip Z for native library
+          endPoint.z *= -1;
+          IntPtr end_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(endPoint));
+          Marshal.StructureToPtr(endPoint, end_ptr, true);
+
+          Vector3 hit = Vector3.one;
+          IntPtr hit_ptr = Marshal.AllocHGlobal(Marshal.SizeOf(Vector3.zero));
+          Marshal.StructureToPtr(Vector3.zero, hit_ptr, true);
+
+          gvr_keyboard_update_controller_ray(keyboard_context, start_ptr, end_ptr, hit_ptr);
+          hit = (Vector3)Marshal.PtrToStructure(hit_ptr, typeof(Vector3));
+          hit.z *= -1;
+
+          Marshal.FreeHGlobal(touch_ptr);
+          Marshal.FreeHGlobal(hit_ptr);
+          Marshal.FreeHGlobal(end_ptr);
+          Marshal.FreeHGlobal(start_ptr);
+        }
       }
-#endif  // UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
+#endif  // UNITY_ANDROID && !UNITY_EDITOR
 
       // Get time stamp.
       gvr_clock_time_point time = gvr_get_time_point_now();
@@ -278,8 +311,10 @@ namespace Gvr.Internal {
       // Unity projection matrices are already in a form GVR needs.
       // Unity stores matrices row-major, so both get a final transpose to get
       // them column-major for GVR.
-      Matrix4x4 flipZ = Matrix4x4.Scale(new Vector3(1, 1, -1));
-      GvrKeyboardSetEyeData(eye, (flipZ * modelview.inverse).transpose.inverse, projection.transpose, rect);
+      GvrKeyboardSetEyeData(eye,
+                            (Pose3D.FLIP_Z * modelview.inverse).transpose.inverse,
+                            projection.transpose,
+                            rect);
       GL.IssuePluginEvent(renderEventFunction, eye == 0 ? renderLeftID : renderRightID);
     }
 
@@ -299,13 +334,15 @@ namespace Gvr.Internal {
       gvr_keyboard_get_recommended_world_from_keyboard_matrix(distance, mat_ptr);
 
       result = (Matrix4x4) Marshal.PtrToStructure(mat_ptr, typeof(Matrix4x4));
+      Marshal.FreeHGlobal(mat_ptr);
 
       return result;
     }
 
     // Returns true if the VrInputMethod APK is at least as high as MIN_VERSION_VRINPUTMETHOD.
     private bool IsVrInputMethodAppMinVersion(GvrKeyboard.KeyboardCallback keyboardEvent) {
-#if UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
+      // Running on Android device.
       AndroidJavaObject activity = GvrActivityHelper.GetActivity();
       if (activity == null) {
         Debug.Log("Failed to get activity for keyboard.");
@@ -331,7 +368,7 @@ namespace Gvr.Internal {
       return true;
 #else
       return true;
-#endif  // UNITY_HAS_GOOGLEVR && UNITY_ANDROID && !UNITY_EDITOR
+#endif  // UNITY_ANDROID && !UNITY_EDITOR
     }
   }
 }

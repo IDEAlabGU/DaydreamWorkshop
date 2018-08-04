@@ -17,17 +17,31 @@
 /// Accesses and configures Daydream settings.
 /// </summary>
 
-// This class is defined only for versions of Unity with the GVR native integration.
-#if UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
 using UnityEngine;
-using UnityEngine.VR;
 using System;
 using System.Runtime.InteropServices;
+
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
+using XRDevice = UnityEngine.VR.VRDevice;
+using XRSettings = UnityEngine.VR.VRSettings;
+#endif  // UNITY_2017_2_OR_NEWER
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif  // UNITY_EDITOR
 
 public static class GvrSettings {
+  /// Name of 'None' VR SDK, as returned by `VRSettings.loadedDeviceName`.
+  public const string VR_SDK_NONE = "None";
+
+  /// Name of Daydream GVR SDK, as returned by `VRSettings.loadedDeviceName`.
+  public const string VR_SDK_DAYDREAM = "daydream";
+
+  /// Name of Cardboard GVR SDK, as returned by `VRSettings.loadedDeviceName` and supportedDevices.
+  public const string VR_SDK_CARDBOARD = "cardboard";
+
   private const string METHOD_GET_WINDOW = "getWindow";
   private const string METHOD_RUN_ON_UI_THREAD = "runOnUiThread";
   private const string METHOD_SET_SUSTAINED_PERFORMANCE_MODE = "setSustainedPerformanceMode";
@@ -47,11 +61,16 @@ public static class GvrSettings {
     set {
       editorEmulatorOnlyViewerPlatformType = value;
     }
-#else
+#elif !UNITY_ANDROID
+    // Running in non-Android player.
     get {
-      IntPtr gvrContextPtr = UnityEngine.XR.XRDevice.GetNativePtr();
+      return ViewerPlatformType.Error;
+    }
+#else
+    // Running on Android.
+    get {
+      IntPtr gvrContextPtr = GetValidGvrNativePtrOrLogError();
       if (gvrContextPtr == IntPtr.Zero) {
-        Debug.Log("Null GVR context pointer, could not get viewer platform type");
         return ViewerPlatformType.Error;
       }
       return (ViewerPlatformType) gvr_get_viewer_type(gvrContextPtr);
@@ -78,27 +97,33 @@ public static class GvrSettings {
     Right,
     Left
   }
+
   public static UserPrefsHandedness Handedness {
-    // Expose a setter only for the editor emulator, for development testing purposes.
 #if UNITY_EDITOR
+    // Expose a setter only for the editor emulator, for development testing purposes.
     get {
       return (UserPrefsHandedness)EditorPrefs.GetInt(EMULATOR_HANDEDNESS_PREF_NAME, (int)UserPrefsHandedness.Right);
     }
     set {
       EditorPrefs.SetInt(EMULATOR_HANDEDNESS_PREF_NAME, (int)value);
     }
+#elif !UNITY_ANDROID
+    // Running in non-Android player.
+    get {
+      return UserPrefsHandedness.Error;
+    }
 #else
     // Running on Android.
     get {
-      IntPtr gvrContextPtr = UnityEngine.XR.XRDevice.GetNativePtr();
+      IntPtr gvrContextPtr = GetValidGvrNativePtrOrLogError();
       if (gvrContextPtr == IntPtr.Zero) {
-        Debug.Log("Null GVR context pointer, could not get GVR user prefs' handedness");
+        Debug.LogError("Unable to determine GVR user prefs' handedness");
         return UserPrefsHandedness.Error;
       }
 
       IntPtr gvrUserPrefsPtr = gvr_get_user_prefs(gvrContextPtr);
       if (gvrUserPrefsPtr == IntPtr.Zero) {
-        Debug.Log("Null GVR user prefs pointer, could not get handedness");
+        Debug.Log("Zero GVR user prefs pointer, unable to determine GVR user prefs' handedness");
         return UserPrefsHandedness.Error;
       }
 
@@ -112,7 +137,7 @@ public static class GvrSettings {
 #endif  // UNITY_EDITOR
 
   private static void SetSustainedPerformanceMode(bool enabled) {
-#if !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
     AndroidJavaObject androidActivity = null;
     try {
       androidActivity = GvrActivityHelper.GetActivity();
@@ -134,9 +159,31 @@ public static class GvrSettings {
           Debug.Log("Set sustained performance mode: " + (enabled ? "ON" : "OFF"));
       })
     );
-#endif  // !UNITY_EDITOR
+#endif  // UNITY_ANDROID && !UNITY_EDITOR
   }
 
+  /// Wraps call to `VRDevice.GetNativePtr()` and logs error if a supported GVR SDK is not active or
+  /// if the returned native pointer is `IntPtr.Zero`.
+  public static IntPtr GetValidGvrNativePtrOrLogError() {
+    if (!XRSettings.enabled) {
+      Debug.LogError("VR is disabled");
+      return IntPtr.Zero;
+    }
+    if (XRSettings.loadedDeviceName != VR_SDK_DAYDREAM
+        && XRSettings.loadedDeviceName != VR_SDK_CARDBOARD) {
+      Debug.LogErrorFormat("Loaded VR SDK '{0}' must be '{1}' or '{2}'",
+          XRSettings.loadedDeviceName, VR_SDK_DAYDREAM, VR_SDK_CARDBOARD);
+      return IntPtr.Zero;
+    }
+    IntPtr gvrContextPtr = XRDevice.GetNativePtr();
+    if (gvrContextPtr == IntPtr.Zero) {
+      Debug.LogError("Unexpected zero GVR native context pointer");
+      return gvrContextPtr;
+    }
+    return gvrContextPtr;
+  }
+
+#if UNITY_ANDROID && !UNITY_EDITOR
   [DllImport(GvrActivityHelper.GVR_DLL_NAME)]
   private static extern IntPtr gvr_get_user_prefs(IntPtr gvrContextPtr);
 
@@ -145,5 +192,5 @@ public static class GvrSettings {
 
   [DllImport(GvrActivityHelper.GVR_DLL_NAME)]
   private static extern int gvr_user_prefs_get_controller_handedness(IntPtr gvrUserPrefsPtr);
+#endif  // UNITY_ANDROID && !UNITY_EDITOR
 }
-#endif  // UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)

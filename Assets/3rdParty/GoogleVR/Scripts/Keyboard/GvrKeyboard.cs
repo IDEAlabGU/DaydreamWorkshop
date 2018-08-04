@@ -1,16 +1,16 @@
 // Copyright 2017 Google Inc. All rights reserved.
-// //
-// // Licensed under the Apache License, Version 2.0 (the "License");
-// // you may not use this file except in compliance with the License.
-// // You may obtain a copy of the License at
-// //
-// //     http://www.apache.org/licenses/LICENSE-2.0
-// //
-// // Unless required by applicable law or agreed to in writing, software
-// // distributed under the License is distributed on an "AS IS" BASIS,
-// // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// // See the License for the specific language governing permissions and
-// // limitations under the License.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -78,10 +78,10 @@ public class GvrKeyboard : MonoBehaviour {
   private EditTextCallback updateCallback = null;
   private EditTextCallback enterCallback = null;
 
-#if UNITY_HAS_GOOGLEVR
+#if UNITY_ANDROID
   // Which eye is currently being rendered.
   private bool isRight = false;
-#endif // UNITY_HAS_GOOGLEVR
+#endif // UNITY_ANDROID
 
   private bool isKeyboardHidden = false;
   private const float kExecuterWait = 0.01f;
@@ -97,6 +97,7 @@ public class GvrKeyboard : MonoBehaviour {
 
   public string EditorText {
     get { return instance != null ? instance.keyboardState.editorText : string.Empty; }
+    set { keyboardProvider.EditorText = value; }
   }
 
   public GvrKeyboardInputMode Mode {
@@ -130,6 +131,7 @@ public class GvrKeyboard : MonoBehaviour {
 
   void OnDestroy() {
     instance = null;
+    threadSafeCallbacks.Clear();
   }
 
   // Use this for initialization.
@@ -180,7 +182,7 @@ public class GvrKeyboard : MonoBehaviour {
     if (keyboardProvider == null || !IsReady) {
       return;
     }
-#if UNITY_HAS_GOOGLEVR
+#if UNITY_ANDROID
     Camera camera = Camera.current;
     if (camera && camera == Camera.main) {
       // Get current eye.
@@ -199,9 +201,7 @@ public class GvrKeyboard : MonoBehaviour {
       // Swap.
       isRight = !isRight;
     }
-#else
-    Debug.LogWarning("Keyboard is not supported in versions of Unity without the native integration");
-#endif  // !UNITY_HAS_GOOGLEVR
+#endif  // !UNITY_ANDROID
   }
 
   // Resets keyboard text.
@@ -219,7 +219,10 @@ public class GvrKeyboard : MonoBehaviour {
     // Get user matrix.
     Quaternion fixRot = new Quaternion(transform.rotation.x * -1, transform.rotation.y * -1,
       transform.rotation.z, transform.rotation.w);
-    Matrix4x4 modelMatrix = Matrix4x4.TRS(transform.position, fixRot, Vector3.one);
+    // Need to convert from left handed to right handed for the Keyboard coordinates.
+    Vector3 fixPos = new Vector3(transform.position.x, transform.position.y,
+      transform.position.z * -1);
+    Matrix4x4 modelMatrix = Matrix4x4.TRS(fixPos, fixRot, Vector3.one);
     Matrix4x4 mat = Matrix4x4.identity;
     Vector3 position = gameObject.transform.position;
     if (position.x == 0 && position.y == 0 && position.z == 0 && !useRecommended) {
@@ -311,6 +314,7 @@ public class GvrKeyboard : MonoBehaviour {
     }
   }
 
+  [AOT.MonoPInvokeCallback(typeof(GvrKeyboardEvent))]
   private static void OnKeyboardCallback(IntPtr closure, GvrKeyboardEvent keyboardEvent) {
     lock (callbacksLock) {
       threadSafeCallbacks.Add(keyboardEvent);

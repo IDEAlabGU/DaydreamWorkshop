@@ -12,25 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using UnityEngine;
 
-namespace GVR.Input {
+namespace GoogleVR.VideoDemo {
+  using UnityEngine;
+
   /// <summary>
   /// Provides controller app button input through UnityEvents.
   /// </summary>
   public class AppButtonInput : MonoBehaviour {
-#if UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
     public ButtonEvent OnAppUp;
     public ButtonEvent OnAppDown;
 
     void Update() {
-      if (GvrController.AppButtonUp)
+      if (Gvr.Internal.ControllerUtils.AnyButtonUp(GvrControllerButton.App))
         OnAppUp.Invoke();
 
-      if (GvrController.AppButtonDown)
+      if (Gvr.Internal.ControllerUtils.AnyButtonDown(GvrControllerButton.App))
         OnAppDown.Invoke();
     }
-
-#endif  // UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
   }
 }

@@ -112,7 +112,7 @@ public class CreateEnvironmentGameController : MonoBehaviour {
 		Ray ray = new Ray();
 
 		//for daydream, lets let google handle this.
-		ray = Camera.main.GetComponent<GvrBasePointerRaycaster>().GetLastRay();
+		ray = Camera.main.GetComponent<GvrBasePointerRaycaster>().GetLastRay().ray;
 
 		RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
