@@ -341,6 +341,51 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114157340184598518, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: maxLaserDistance
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157340184598518, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: shrinkLaser
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084558569033440, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: raycastMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084558569033440, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: overrideCameraRayIntersectionDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114098762527005598, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: raycastMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114098762527005598, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: overrideCameraRayIntersectionDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114387799955645334, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: maxLaserDistance
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114387799955645334, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: shrinkLaser
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23415071873636364, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41a655f54fa6e3e4e963a87f4eb3fb8a, type: 2}
   m_IsPrefabParent: 0

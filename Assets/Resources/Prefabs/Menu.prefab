@@ -559,7 +559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739800cd36aba44e9b04ce977e5784bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastMode: 0
   ignoreReversedGraphics: 1
   blockingObjects: 0
   blockingMask:
@@ -1757,7 +1756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739800cd36aba44e9b04ce977e5784bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastMode: 0
   ignoreReversedGraphics: 1
   blockingObjects: 0
   blockingMask:
